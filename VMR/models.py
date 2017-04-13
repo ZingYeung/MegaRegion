@@ -27,12 +27,15 @@ class CommuteFlow(models.Model):
         return 'Flow %s : %s -> %s' % (self.id, self.ofips, self.dfips)
 
 class MegaRegion(models.Model):
-    center = models.IntegerField("10 Digit MegaRegion Center FIPS Code",primary_key=True)
+    code = models.IntegerField("10 Digit MegaRegion Center FIPS Code")
     name = models.CharField("Mega Region Name", max_length=50)
+    max_distance = models.FloatField("Max Distance of Flows contained")
     cnt_flows = models.IntegerField("Numbers Of Flows Contained")
     # GeoDjango-specific: a geometry field (MutilPolygonField)
-    # Boundary of MegaRegion
-    boundary = models.MultiPolygonField(srid=4326)
+    # Boundary of Mega Region
+    boundary = models.MultiPointField(srid=4326)
+    # Convex Hull of Mega Region
+    convex_hull = models.PolygonField(srid=4326)
 
     def __str__(self):
-        return 'MegaRegion %s: %s' %(self.center, self.name)
+        return 'MegaRegion %s: %s %s <=%s' %(self.id, self.code, self.name, self.max_distance)
