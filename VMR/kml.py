@@ -25,7 +25,7 @@ def format_all_flows():
     flows_template = (
         '<Placemark>\n'
         '   <styleUrl>#{style_id}</styleUrl>\n'
-        '   {flow}'
+        '   {flow}\n'
         '</Placemark>'
     )
     flows = "\n".join(flows_template.format(style_id=mr_code, flow=line) for (mr_code, line) in flows_kml)
@@ -34,8 +34,10 @@ def format_all_flows():
     kml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<kml xmlns="http://www.opengis.net/kml/2.2">\n'
-        '{styles}\n'
-        '{flows}\n'
+        '   <Document>\n'
+        '       {styles}\n'
+        '       {flows}\n'
+        '   </Document>\n'
         '</kml>'
     ).format(styles=styles, flows=flows)
     return kml

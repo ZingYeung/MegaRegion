@@ -380,11 +380,15 @@ function initMap() {
     geocodeAddr(geocoder, map);
   });
 
-  var flowLayer = new google.maps.KmlLayer('/VMR/all_flows.kml', {
+  var flowLayer = new google.maps.KmlLayer({
+      url: 'https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml',
+      // url: 'http://raw.githubusercontent.com/ZingYeung/MegaRegion/master/VMR/static/VMR/kml/all_flows.kml',
+      suppressInfoWindows: true,
+      preserveViewport: true,
       map: map
   });
 
-  // loadAllFlows();
+  loadAllFlows();
 }
 
 function loadAllFlows() {
@@ -394,7 +398,7 @@ function loadAllFlows() {
         success : function (data) {
             map.data.addGeoJson(data);
             map.data.setStyle({
-                strokeColor: 'mediumseagreen',
+                strokeColor: 'firebrick',
                 strokeWeight: 1,
                 strokeOpacity: 0.3,
                 clickable: false,
