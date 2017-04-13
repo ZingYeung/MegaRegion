@@ -7,7 +7,7 @@ import os
 # Format KML of all commute flows
 def format_all_flows():
     #subsample flows
-    samples = subsample_flows(50000)
+    samples = subsample_flows(1000)
     # format styles
     mr_codes = CommuteFlow.objects.values_list('dfips_comm', flat=True).distinct()
     style_template = (

@@ -381,8 +381,8 @@ function initMap() {
   });
 
   var flowLayer = new google.maps.KmlLayer({
-      url: 'https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml',
-      // url: 'http://raw.githubusercontent.com/ZingYeung/MegaRegion/master/VMR/static/VMR/kml/all_flows.kml',
+      // url: 'https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml',
+      url: 'http://raw.githubusercontent.com/ZingYeung/MegaRegion/master/VMR/static/VMR/kml/all_flows.kml',
       suppressInfoWindows: true,
       preserveViewport: true,
       map: map
