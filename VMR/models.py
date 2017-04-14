@@ -38,4 +38,5 @@ class MegaRegion(models.Model):
     convex_hull = models.PolygonField(srid=4326)
 
     def __str__(self):
-        return 'MegaRegion %s: %s %s <=%s' %(self.id, self.code, self.name, self.max_distance)
+        return 'MegaRegion {id}: {code} {name} <= {max_distance}'.format(
+            id=self.id, code=self.code, name=self.name, max_distance=self.max_distance)
