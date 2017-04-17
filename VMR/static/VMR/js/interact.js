@@ -1,6 +1,10 @@
 $(document).ready(function(){
 	initStates();
-	// getAllFlows();
+	$('#contour').on('click', function () {
+        var $btn = $(this).button('loading')
+        // business logic...
+        $btn.button('reset')
+  })
 });
 
 function initStates(){
@@ -250,17 +254,6 @@ function initStates(){
         }
     ]
 }
-	// $.ajax({
-	// 	url: 'states.json',
-	// 	dataType: 'application/json',
-	// 	success: function(data){
-	// 		$.each(data.states, function(key, value){
-	// 			$("#states_list").append(
-	// 				$('<option></option>').attr({"id" : value.abbr, "value" : value.name}).html("<a>" + value.name + "</a>")
-	// 			);
-	// 		});
-	// 	}
-	// });
 	$.each(list.states, function(key, value){
 		$("#states_list").append(
 			$('<option></option>').attr({"value": value.abbr}).html("<a>" + value.name + "</a>")
@@ -294,14 +287,3 @@ function getCountiesByState(){
 		}
 	});
 }
-
-// function getAllFlows(){
-//     $.ajax({
-//         url: '/VMR/all_flows.json',
-//         dataType: 'json',
-//         success: function(data){
-//             var map = google.maps.Map(document.getElementById('map'));
-//             map.data.addGeoJson(data)
-//         }
-//     });
-// }
