@@ -1,4 +1,6 @@
 var map;
+var cfLayer;
+var mrLayer;
 
 function initMap() {
   var uluru = {lat: 37.09024, lng: -95.712891};
@@ -361,7 +363,7 @@ function initMap() {
   //     map: map
   // });
 
-  // loadAllFlows();
+  loadAllFlows();
   loadMegaRegions();
 }
 
@@ -507,35 +509,35 @@ function loadAllFlows() {
         url : '/VMR/all_flows.json',
         dataType : 'json',
         success : function (data) {
-            map.data.addGeoJson(data);
-            map.data.setStyle(function(feature) {
+            cfLayer = new google.maps.Data();
+            cfLayer.addGeoJson(data);
+            cfLayer.setStyle(function(feature) {
                 var mr_codes = feature.getProperty('dfips_comm');
                 return {
                     strokeColor: color_list[mr_codes],
                     strokeWeight: 0.75,
                     strokeOpacity: 0.3,
-                    clickable: false
+                    clickable: false,
+                    zIndex: 1
                 };
             });
+            cfLayer.setMap(map);
         }
     })
 }
 
 function loadMegaRegions() {
-    $.ajax({
-        url: '/VMR/mega_regions.json',
-        dataType: 'json',
-        success: function (data) {
-            map.data.addGeoJson(data);
-            map.data.setStyle({
-                fillOpacity: 0,
-                strokeColor: '#a9a9a9',
-                strokeWeight: 1.5,
-                strokeOpacity: 1,
-                clickable: true,
-            })
-        }
-    })
+    mrLayer = new google.maps.Data();
+    mrLayer.addGeoJson(mega_regions);
+    mrLayer.setStyle({
+            fillOpacity: 0,
+            strokeColor: '#a9a9a9',
+            strokeWeight: 1.5,
+            strokeOpacity: 1,
+            clickable: true,
+            zIndex: 2
+    });
+    mrLayer.setMap(map);
 }
 
 function geocodeAddr(geocoder, resultMap){

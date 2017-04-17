@@ -1,10 +1,50 @@
+var mega_regions;
 $(document).ready(function(){
 	initStates();
-	$('#contour').on('click', function () {
-        var $btn = $(this).button('loading')
-        // business logic...
-        $btn.button('reset')
-  })
+	$.ajax({
+        url: '/VMR/mega_regions.json',
+        dataType: 'json',
+        success: function (data) {
+            mega_regions = data;
+        }
+    });
+
+    $("#contour").on('click', function () {
+        $(".panel").removeClass('hidden');
+        $("#mega-regions").empty().append('<button type="button" id="show-all" class="list-group-item"><span class="label label-danger pull-right">Hide All</span></button>');
+        loadMegaRegions();
+        $.each(mega_regions.features, function(key, value){
+            var property = value.properties;
+            $("#mega-regions").append(
+                $('<button></button>').attr({"type":"button", "class":"list-group-item", "id":value.properties.code})
+                    .html(value.properties.name+'<span class="label label-danger pull-right">Hide</span>')
+            )
+        });
+        $(".badge").html(mega_regions.features.length);
+    });
+
+	$("#mega-regions").on('click', 'button.list-group-item', function () {
+	    var label = $(this.lastChild);
+        label.toggleClass("label-primary").toggleClass("label-danger");
+        // if (label.text()=='Hide'){
+        //     label.text('Show');
+        // }else if(label.text()=='Show'){
+        //     label.text('Hide');
+        // }
+        switch (label.text()){
+            case 'Hide':
+                label.text('Show');
+                break;
+            case 'Show':
+                label.text('Hide');
+                break;
+            case 'Hide All':
+                label.text('Show All');
+                break;
+            case 'Show All':
+                label.text('Hide All');
+        }
+    })
 });
 
 function initStates(){
@@ -253,7 +293,7 @@ function initStates(){
             "abbr": "WY"
         }
     ]
-}
+};
 	$.each(list.states, function(key, value){
 		$("#states_list").append(
 			$('<option></option>').attr({"value": value.abbr}).html("<a>" + value.name + "</a>")
