@@ -24,7 +24,7 @@
     <link href="{% static 'VMR/css/dashboard.css' %}" rel="stylesheet">
 
     <!-- Bootstrap Slider CSS -->
-    <link href="{% static 'VMR/css/slider.css' %}" rel="stylesheet">
+    <link href="{% static 'VMR/css/bootstrap-slider.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]>
@@ -41,7 +41,7 @@
 
     <!-- user resource -->
     <script src="{% static 'VMR/js/map.js' %}"></script>
-    <script src="{% static 'VMR/js/interact.js' %}"></script>
+    <!--<script src="{% static 'VMR/js/interact.js' %}"></script>-->
 </head>
 
 <style type="text/css">
@@ -90,82 +90,31 @@
                 </ul>
             </ul>
             <ul class="nav nav-sidebar well-lg">
-                <div class="well well-sm">
-
-                    <div class="slider slider-horizontal ">
-                        <div class="slider-track">
-                            <div class="slider-selection" style="left: 0%; width: 70%;"></div>
-                            <div class="slider-handle round" style="left: 70%;"></div>
-                            <div class="slider-handle round hide" style="left: 0%;"></div>
-                        </div>
-                        <div class="tooltip top" style="top: -40px; left: 51px;">
-                            <div class="tooltip-arrow"></div>
-                            <div class="tooltip-inner">Current value: 7</div>
-                        </div>
-                        <input type="text" class="span2" value="4" id="sl1">
-                    </div>
-                </div>
-
                 <button type="button" id="contour" class="btn btn-primary">
                     Contour <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </button>
-                <div class="panel panel-default hidden">
+                <div class="panel panel-info hidden">
                     <!-- Default panel contents -->
                     <div class="panel-heading">Mega Regions<span class="badge pull-right"></span></div>
+                    <div class="panel-body">
+                        <span class="label label-primary">Max Commute Distance</span>
+                        <div class="well">
+                            <input id="distance" type="text"/>
+                        </div>
+                    </div>
                     <ul id="mega-regions" class="list-group">
-                        <!--<li class="list-group-item">Dallas-Ft Worth</li>-->
-                        <!--<li class="list-group-item">Upstate NY</li>-->
-                        <!--<li class="list-group-item">Connecticut Valley</li>-->
-                        <!--<li class="list-group-item">San Diego</li>-->
                     </ul>
                 </div>
             </ul>
 
         </div>
         <div class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 main">
-            <h1 class="page-header">Map</h1>
+            <!--<h1 class="page-header">Map</h1>-->
             <!-- <div class="row placeholders"> -->
             <div id="map" class="main"></div>
             <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM8tq2aFxGEiqiR-qsOmQqgLddW38BEls&callback=initMap">
             </script>
-            <!--<h2 class="sub-header">Statistic</h2>-->
-            <!--<div class="table-responsive">-->
-            <!--<table class="table table-striped">-->
-            <!--<thead>-->
-            <!--<tr>-->
-            <!--<th>#</th>-->
-            <!--<th>Origin</th>-->
-            <!--<th>Destination</th>-->
-            <!--<th># Flows</th>-->
-            <!--<th>Avg Length</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr>-->
-            <!--<td>1,001</td>-->
-            <!--<td>New Jersey</td>-->
-            <!--<td>New York</td>-->
-            <!--<td>20,401</td>-->
-            <!--<td>40.96 mi</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>1,002</td>-->
-            <!--<td>Connecticut</td>-->
-            <!--<td>New York</td>-->
-            <!--<td>11,975</td>-->
-            <!--<td>52.78 mi</td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>1,003</td>-->
-            <!--<td>New York</td>-->
-            <!--<td>New York</td>-->
-            <!--<td>45,795</td>-->
-            <!--<td>4.56 mi</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-            <!--</table>-->
-            <!--</div>-->
         </div>
     </div>
 </div>

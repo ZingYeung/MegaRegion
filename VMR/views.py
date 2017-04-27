@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.serializers import serialize
+from django.db.models import Q
 from VMR.models import CommuteFlow,  MegaRegion
 from VMR.utils import subsample_flows
 
@@ -17,9 +18,16 @@ def all_flows(request):
     return HttpResponse(geo_json, content_type='application/json')
 
 
-def mega_regions(request):
+# def mega_regions(request):
+#     geo_json = serialize('geojson',
+#                          MegaRegion.objects.filter(max_distance=80).order_by('name'),
+#                          geometry_field='convex_hull',
+#                          fields=('code','name',))
+#     return HttpResponse(geo_json, content_type='application/json')
+
+def mega_regions(request, max_distance):
     geo_json = serialize('geojson',
-                         MegaRegion.objects.filter().exclude(code__in=(12,19,25,39,40,41)),
+                         MegaRegion.objects.filter(max_distance=max_distance).order_by('name'),
                          geometry_field='convex_hull',
                          fields=('code','name',))
     return HttpResponse(geo_json, content_type='application/json')
